@@ -33,6 +33,7 @@ namespace Swing
             NominalLength = 40;
             DampCoef = Double.Parse(tbDamping.Text);
             Angle = GetRad(Double.Parse(tbAngle.Text));
+            AngVel = 0; AngAcc = 0;
             tbDisplay.Text = "Moving...";
             GetTrack();
             pl = new Polyline();
@@ -71,6 +72,7 @@ namespace Swing
 
         private void PendulumInitialize()
         {
+            track.Clear();
             tbMass.Text = "1";
             tbLength.Text = "40";
             tbDamping.Text = "0.1";
