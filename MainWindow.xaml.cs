@@ -10,6 +10,8 @@ namespace Swing
 {
     public partial class Clock : Window
     {
+        bool paused = true;
+        bool start = true;
         private double Mass = 1;
         private double NominalLength = 40;
         private double Length = 1;
@@ -17,32 +19,53 @@ namespace Swing
         private double Angle = 45, AngVel = 0;
         private double step = 0.1;
         private double HourAngle = 0, MinuteAngle = 0, SecondAngle = 0;
-        private double dH = GetRad(360 / Math.Pow(60, 3)), dM = GetRad(360 / Math.Pow(60, 2)), dS = GetRad(360 / 60);
-        private Queue<double> track = new Queue<double>();
+        private double dH, dM, dS, TimeCoef;
         Polyline pl = new Polyline();
         const double g = 9.81;
         public Clock()
         {
             InitializeComponent();
         }
-        private void btnStart_Click(object sender, RoutedEventArgs e)
+        private void btnPause_Click(object sender, RoutedEventArgs e)
         {
-            track.Clear();
-            HourAngle = 0; MinuteAngle = 0; SecondAngle = 0;
-            //impossible to enter mass/length/dampcoef < 0
-            Mass = Math.Abs(Double.Parse(tbMass.Text));
-            tbMass.Text = Mass.ToString();
-            Length = Math.Abs(Double.Parse(tbLength.Text));
-            tbLength.Text = Length.ToString();
-            DampCoef = Math.Abs(Double.Parse(tbDamping.Text));
-            tbDamping.Text = DampCoef.ToString();
-            Angle = GetRad(Double.Parse(tbAngle.Text)); AngVel = 0;
-            tbDisplay.Text = "Moving...";
-            //GetTrack();
-            pl = new Polyline();
-            pl.Stroke = Brushes.Red;
+            if (start)
+            {
+                HourAngle = 0; MinuteAngle = 0; SecondAngle = 0;
+                //impossible to enter mass/length/dampcoef/timecoef < 0
+                Mass = Math.Abs(Double.Parse(tbMass.Text));
+                tbMass.Text = Mass.ToString();
+                Length = Math.Abs(Double.Parse(tbLength.Text));
+                tbLength.Text = Length.ToString();
+                DampCoef = Math.Abs(Double.Parse(tbDamping.Text));
+                tbDamping.Text = DampCoef.ToString();
+                TimeCoef = Math.Abs(Double.Parse(tbTimeCoef.Text));
+                tbTimeCoef.Text = TimeCoef.ToString();
+                string[] t = tbTime.Text.Split(":");
+                HourAngle = Double.Parse(t[0])*GetRad(30);
+                MinuteAngle = Double.Parse(t[1])*GetRad(6);
+                SecondAngle = Double.Parse(t[2])*GetRad(6);
+
+                Angle = GetRad(Double.Parse(tbAngle.Text));
+                dH = GetRad(360 / Math.Pow(60, 3)) * TimeCoef;
+                dM = GetRad(360 / Math.Pow(60, 2)) * TimeCoef;
+                dS = GetRad(360 / 60) * TimeCoef; 
+                AngVel = 0;
+                tbDisplay.Text = "Moving...";
+                pl = new Polyline();
+                pl.Stroke = Brushes.Red;
+                start = false;
+            }
             CompositionTarget.Rendering -= StartAnimation;
-            CompositionTarget.Rendering += StartAnimation;
+            if (paused)
+            {
+                PauseBtn.Content = "Pause";
+                CompositionTarget.Rendering += StartAnimation;
+            }
+            else
+            {
+               PauseBtn.Content = "Resume";
+            }
+            paused = !paused;
         }
 
         private void StartAnimation(object sender, EventArgs e)
@@ -65,6 +88,7 @@ namespace Swing
             {
                 tbDisplay.Text = "Stopped";
                 CompositionTarget.Rendering -= StartAnimation;
+                start = true;
             }
         }
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -72,30 +96,25 @@ namespace Swing
             ClockInitialize();
             tbDisplay.Text = "Stopped";
             CompositionTarget.Rendering -= StartAnimation;
+            start = true;
+            paused = true;
         }
 
         private void ClockInitialize()
         {
-            track.Clear();
             tbMass.Text = "1";
             tbLength.Text = "40";
             tbDamping.Text = "0.1";
             tbAngle.Text = "45";
+            tbTimeCoef.Text = "1";
+            tbTime.Text = "0:0:0";
             PendulumLine.X2 = 140;
             PendulumLine.Y2 = 100;
             ball.Center = new Point(140, 100);
             HourHand.X2 = 140; HourHand.Y2 = 22; HourAngle = 0;
             MinuteHand.X2 = 140; MinuteHand.Y2 = 22; MinuteAngle = 0;
             SecondHand.X2 = 140; SecondHand.Y2 = 22; SecondAngle = 0;
-        }
-        private void btnStop_Click(object sender, RoutedEventArgs e)
-        {
-            PendulumLine.X2 = 140;
-            PendulumLine.Y2 = 100;
-            ball.Center = new Point(140, 100);
-            tbDisplay.Text = "Stopped";
-            CompositionTarget.Rendering -= StartAnimation;
-            track.Clear();
+            PauseBtn.Content = "Start";
         }
         private double sec_der (double phi, double v) { 
             return -(DampCoef*v/(Mass*Length) + g*Math.Sin(phi)/Length);

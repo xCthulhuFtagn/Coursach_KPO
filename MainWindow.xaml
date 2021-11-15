@@ -57,12 +57,21 @@
                     <TextBox Name="tbAngle" Text="45"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Times New Roman" FontWeight="Bold"
+   FontSize="12.667">Time Coef:</TextBlock>
+                    <TextBox Name="tbTimeCoef" Text="1"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Times New Roman" FontWeight="Bold"
+   FontSize="12.667">Starting at:</TextBlock>
+                    <TextBox Name="tbTime" Text="0:0:0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
 
                 </StackPanel>
             </StackPanel>
             <StackPanel Margin="70,0,0,10">
-                <Button Click="btnStart_Click" Content="Start"/>
-                <Button Click="btnStop_Click" Content="Stop"/>
+                <Button Click="btnPause_Click" Content="Start" Name="PauseBtn"/>
                 <Button Click="btnReset_Click" Content="Reset"/>
             </StackPanel>
             <StackPanel Margin="70,40,0,0">
@@ -87,13 +96,73 @@
   Canvas.Top="10"/>
                     <Line Name="PendulumLine" X1 ="140" Y1="60"
   X2="140" Y2="100" Stroke="Black"/>
-                    <Ellipse Fill="Azure" Width='40' Height="40" Canvas.Left="120" Canvas.Top="22"/>
                     <Path Fill="DarkGoldenrod">
                         <Path.Data>
                             <EllipseGeometry x:Name="ball" RadiusX="10"
   RadiusY="10" Center="140,100"/>
                         </Path.Data>
                     </Path>
+                    <Ellipse Fill="Azure" Width='40' Height="40" Canvas.Left="120" Canvas.Top="22"/>
+                    <Line X1="140" Y1="22" X2="140" Y2="23" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="142.09" Y1="22.1095" X2="141.985" Y2="23.104" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="144.156" Y1="22.4366" X2="143.948" Y2="23.4148" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="146.177" Y1="22.9779" X2="145.868" Y2="23.929" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="148.131" Y1="23.7274" X2="147.724" Y2="24.641" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="149.995" Y1="24.6768" X2="149.496" Y2="25.543" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="151.751" Y1="25.8159" X2="151.163" Y2="26.6251" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="153.377" Y1="27.1321" X2="152.708" Y2="27.8755" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="154.857" Y1="28.6111" X2="154.114" Y2="29.2805" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="156.175" Y1="30.2366" X2="155.366" Y2="30.8247" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="157.315" Y1="31.9908" X2="156.449" Y2="32.4913" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="158.266" Y1="33.8546" X2="157.353" Y2="34.2619" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="159.017" Y1="35.8075" X2="158.066" Y2="36.1172" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="159.56" Y1="37.8283" X2="158.582" Y2="38.0369" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="159.889" Y1="39.8946" X2="158.894" Y2="39.9999" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="160" Y1="41.9841" X2="159" Y2="41.9849" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="159.892" Y1="44.0737" X2="158.898" Y2="43.97" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="159.567" Y1="46.1406" X2="158.588" Y2="45.9335" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="159.027" Y1="48.1622" X2="158.076" Y2="47.8541" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="158.279" Y1="50.1163" X2="157.365" Y2="49.7105" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="157.331" Y1="51.9816" X2="156.465" Y2="51.4825" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="156.193" Y1="53.7377" X2="155.384" Y2="53.1508" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="154.879" Y1="55.3652" X2="154.135" Y2="54.697" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="153.401" Y1="56.8465" X2="152.731" Y2="56.1042" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="151.776" Y1="58.1653" X2="151.187" Y2="57.3571" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="150.023" Y1="59.3072" X2="149.522" Y2="58.4419" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="148.16" Y1="60.2597" X2="147.752" Y2="59.3467" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="146.208" Y1="61.0123" X2="145.897" Y2="60.0616" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="144.187" Y1="61.5567" X2="143.978" Y2="60.5789" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="142.121" Y1="61.8872" X2="142.015" Y2="60.8928" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="140.032" Y1="62" X2="140.03" Y2="61" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="137.942" Y1="61.8939" X2="138.045" Y2="60.8992" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="135.875" Y1="61.57" X2="136.081" Y2="60.5915" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="133.853" Y1="61.0319" X2="134.16" Y2="60.0803" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="131.898" Y1="60.2856" X2="132.303" Y2="59.3713" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="130.032" Y1="59.3391" X2="130.531" Y2="58.4721" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="128.275" Y1="58.2028" X2="128.861" Y2="57.3926" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="126.647" Y1="56.8892" X2="127.314" Y2="56.1447" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="125.164" Y1="55.4126" X2="125.906" Y2="54.7419" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="123.844" Y1="53.7892" X2="124.652" Y2="53.1997" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="122.701" Y1="52.0368" X2="123.566" Y2="51.5349" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="121.747" Y1="50.1745" X2="122.659" Y2="49.7658" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="120.993" Y1="48.2227" X2="121.943" Y2="47.9116" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="120.447" Y1="46.2029" X2="121.424" Y2="45.9927" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="120.114" Y1="44.137" X2="121.109" Y2="44.0302" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="120" Y1="42.0478" X2="121" Y2="42.0454" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="120.105" Y1="39.958" X2="121.099" Y2="40.0601" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="120.427" Y1="37.8906" X2="121.405" Y2="38.0961" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="120.963" Y1="35.8682" X2="121.915" Y2="36.1747" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="121.708" Y1="33.9128" X2="122.623" Y2="34.3172" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="122.653" Y1="32.046" X2="123.52" Y2="32.5437" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="123.788" Y1="30.2881" X2="124.598" Y2="30.8737" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="125.1" Y1="28.6585" X2="125.845" Y2="29.3255" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="126.576" Y1="27.1748" X2="127.247" Y2="27.9161" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="128.198" Y1="25.8534" X2="128.788" Y2="26.6608" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="129.949" Y1="24.7088" X2="130.452" Y2="25.5733" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="131.811" Y1="23.7534" X2="132.22" Y2="24.6657" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="133.762" Y1="22.9977" X2="134.074" Y2="23.9478" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="135.782" Y1="22.4499" X2="135.992" Y2="23.4274" Stroke="Black" StrokeThickness="0.2"/>
+                    <Line X1="137.847" Y1="22.1162" X2="137.955" Y2="23.1104" Stroke="Black" StrokeThickness="0.2"/>
                     <Line x:Name="HourHand" X1="140" Y1="42" X2="140" Y2="22" Stroke="Black" StrokeThickness="3"/>
                     <Line x:Name="MinuteHand" X1="140" Y1="42" X2="140" Y2="22" Stroke="DarkCyan" StrokeThickness="1.5"/>
                     <Line x:Name="SecondHand" X1="140" Y1="42" X2="140" Y2="22" Stroke="GreenYellow" StrokeThickness="0.5"/>
