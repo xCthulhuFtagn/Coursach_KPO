@@ -26,18 +26,22 @@ namespace Swing
         {
             InitializeComponent();
         }
+        private void SettingUp(TextBox input, double param)
+        {
+            var tmp = input.Text.Split('.', ',');
+            param = Math.Abs(Double.Parse(String.Join('.', tmp)));
+            input.Text = param.ToString();
+        }
         private void btnPause_Click(object sender, RoutedEventArgs e)
         {
             if (start)
             {
                 HourAngle = 0; MinuteAngle = 0; SecondAngle = 0;
                 //impossible to enter mass/length/dampcoef/timecoef < 0
-                Mass = Math.Abs(Double.Parse(tbMass.Text));
-                tbMass.Text = Mass.ToString();
-                Length = Math.Abs(Double.Parse(tbLength.Text));
-                tbLength.Text = Length.ToString();
-                DampCoef = Math.Abs(Double.Parse(tbDamping.Text));
-                tbDamping.Text = DampCoef.ToString();
+                SettingUp(tbMass, Mass);
+                SettingUp(tbLength, Length);
+                SettingUp(tbDamping, DampCoef);
+                SettingUp(tbTimeCoef, TimeCoef);
                 TimeCoef = Math.Abs(Double.Parse(tbTimeCoef.Text));
                 tbTimeCoef.Text = TimeCoef.ToString();
                 string[] t = tbTime.Text.Split(":");

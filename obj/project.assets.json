@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Owner\\.nuget\\packages\\": {},
+    "C:\\Users\\mkolo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Owner\\source\\repos\\xCthulhuFtagn\\Coursach_KPO\\Coursach.csproj",
+      "projectUniqueName": "C:\\Users\\mkolo\\Source\\Repos\\xCthulhuFtagn\\Coursach_KPO\\Coursach.csproj",
       "projectName": "Coursach",
-      "projectPath": "C:\\Users\\Owner\\source\\repos\\xCthulhuFtagn\\Coursach_KPO\\Coursach.csproj",
-      "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Owner\\source\\repos\\xCthulhuFtagn\\Coursach_KPO\\obj\\",
+      "projectPath": "C:\\Users\\mkolo\\Source\\Repos\\xCthulhuFtagn\\Coursach_KPO\\Coursach.csproj",
+      "packagesPath": "C:\\Users\\mkolo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mkolo\\Source\\Repos\\xCthulhuFtagn\\Coursach_KPO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mkolo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
