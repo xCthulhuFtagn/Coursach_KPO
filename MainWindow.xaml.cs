@@ -5,11 +5,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Collections.Generic;
+using System.Globalization;
+
+
 
 namespace Swing
 {
+
     public partial class Clock : Window
     {
+        public IFormatProvider provider = CultureInfo.CurrentCulture;
         bool paused = true;
         bool start = true;
         private double Mass = 1;
@@ -26,10 +31,10 @@ namespace Swing
         {
             InitializeComponent();
         }
-        private void SettingUp(TextBox input, double param)
+        private void SettingUp(ref TextBox input, ref double param)
         {
             var tmp = input.Text.Split('.', ',');
-            param = Math.Abs(Double.Parse(String.Join('.', tmp)));
+            param = Math.Abs(Double.Parse(String.Join('.', tmp), provider));
             input.Text = param.ToString();
         }
         private void btnPause_Click(object sender, RoutedEventArgs e)
@@ -38,10 +43,10 @@ namespace Swing
             {
                 HourAngle = 0; MinuteAngle = 0; SecondAngle = 0;
                 //impossible to enter mass/length/dampcoef/timecoef < 0
-                SettingUp(tbMass, Mass);
-                SettingUp(tbLength, Length);
-                SettingUp(tbDamping, DampCoef);
-                SettingUp(tbTimeCoef, TimeCoef);
+                SettingUp(ref tbMass, ref Mass);
+                SettingUp(ref tbLength, ref Length);
+                SettingUp(ref tbDamping, ref DampCoef);
+                SettingUp(ref tbTimeCoef, ref TimeCoef);
                 TimeCoef = Math.Abs(Double.Parse(tbTimeCoef.Text));
                 tbTimeCoef.Text = TimeCoef.ToString();
                 string[] t = tbTime.Text.Split(":");
