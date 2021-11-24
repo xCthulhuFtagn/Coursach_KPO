@@ -14,7 +14,7 @@ namespace Swing
 
     public partial class Clock : Window
     {
-        public IFormatProvider provider = CultureInfo.CurrentCulture;
+        public IFormatProvider provider = CultureInfo.CultureInfo.CreateSpecificCulture("en-En");
         bool paused = true;
         bool start = true;
         private double Mass = 1;
